@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'candidates/list_best_matches/:years_experience/:city/:technology', to: 'candidates#list_5_best_matches', as: 'list_best_matches'
 end
