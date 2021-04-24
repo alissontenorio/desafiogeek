@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2021_04_24_172351) do
   create_table "candidate_technologies", force: :cascade do |t|
     t.integer "candidate_id", null: false
     t.string "name", null: false
-    t.boolean "is_main_tech", null: false
+    t.boolean "is_main_tech"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["candidate_id"], name: "index_candidate_technologies_on_candidate_id"
@@ -23,7 +23,8 @@ ActiveRecord::Schema.define(version: 2021_04_24_172351) do
 
   create_table "candidates", force: :cascade do |t|
     t.string "city", null: false
-    t.string "experience", null: false
+    t.string "district", null: false
+    t.integer "years_experience", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
