@@ -12,8 +12,11 @@
 
 ActiveRecord::Schema.define(version: 2021_04_24_172351) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "candidate_technologies", force: :cascade do |t|
-    t.integer "candidate_id", null: false
+    t.bigint "candidate_id", null: false
     t.string "name", null: false
     t.boolean "is_main_tech"
     t.datetime "created_at", precision: 6, null: false
