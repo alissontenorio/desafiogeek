@@ -4,13 +4,28 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  #<<: *default
+  # database: db/development.sqlite3
+  host: ec2-3-233-43-103.compute-1.amazonaws.com
+  adapter: postgresql
+  encoding: unicode
+  database: dcinnr0643ui2u
+  port: 5432
+  pool: 5
+  username: mceknqhjniiyra
+  password: 5dba7c8be18c825b4c44c65c60bfb73cb86484678f4c914d1b3100cd29707ecd  
 
 test:
   <<: *default
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  # <<: *default
+  # database: db/production.sqlite3
+  host: ec2-3-233-43-103.compute-1.amazonaws.com
+  adapter: postgresql
+  encoding: unicode
+  database: dcinnr0643ui2u
+  pool: 5
+  username: mceknqhjniiyra
+  password: 5dba7c8be18c825b4c44c65c60bfb73cb86484678f4c914d1b3100cd29707ecd
