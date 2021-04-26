@@ -33,6 +33,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'json_spec', '~> 1.1', '>= 1.1.5'
+  gem 'rack-cors'
 end
 
 group :development do
@@ -46,3 +47,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "rest-client", '~> 2.1'
+
