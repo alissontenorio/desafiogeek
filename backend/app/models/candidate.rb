@@ -12,10 +12,11 @@ class Candidate < ApplicationRecord
         c.limit(5)     
     end
 
-    def self.get_5_best_matches(years_experience_min = 0, years_experience_max = 999, city_district = 'Remote', 
+    def self.get_5_best_matches(years_experience_min, years_experience_max, city_district, 
                               technologies = ",")
-      years_experience_min = years_experience_min.to_i
-      years_experience_max = years_experience_max.to_i
+      years_experience_min = years_experience_min.present? ? years_experience_min.to_i : 0
+      years_experience_max = years_experience_max.present? ? years_experience_max.to_i : 999
+      city_district = city_district.present? ? city_district : 'Remote'
       technologies = "," if technologies.nil?
       technologies = technologies.split(',')
       technologies = "'#{technologies.join("','")}'"
@@ -42,7 +43,7 @@ class Candidate < ApplicationRecord
             GROUP BY candidate_id) ct
           ON cd.id=ct.candidate_id 
         ) as cs
-        ORDER BY score_points desc
+        ORDER BY score_points desc, years_experience desc
         LIMIT 5;    
         """
       matches
