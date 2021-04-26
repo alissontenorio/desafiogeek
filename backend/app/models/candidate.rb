@@ -18,7 +18,7 @@ class Candidate < ApplicationRecord
       years_experience_max = years_experience_max.present? ? years_experience_max.to_i : 999
       city_district = city_district.present? ? city_district : 'Remote'
       technologies = "," if technologies.nil?
-      technologies = technologies.split(',')
+      technologies = technologies.split(',').map{|k| k.strip}
       technologies = "'#{technologies.join("','")}'"
       city_district = "'#{city_district}'"
 
