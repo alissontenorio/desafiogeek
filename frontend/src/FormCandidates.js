@@ -10,14 +10,11 @@ const FormCandidates = (props) => {
     const [ years, setYears ] = useState('')
     const [ technology, setTechnology ] = useState('')
 
-    const cityOptions = [ 'Porto Alegre', "Maceió" ]
+    const cityOptions = [ 'Porto Alegre', "Maceió", "Recife", "Rio de Janeiro", "São Paulo" ]
     const yearsOptions = [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16']
     const technologyOptions = ['Java', 'React']
 
     async function getCandidatesFromApiJSON() {
-      // const response = await fetch(
-      //   "https://candidatosgh.herokuapp.com/candidates/list_best_matches/1/Blumenau/Java");
-      //let url2 = "https://candidatosgh.herokuapp.com/candidates/list_best_matches/1/Blumenau/Java";
       let url = "https://candidatosgh.herokuapp.com/candidates/list_best_matches/"+years+"/"+city+"/"+technology;
   
       const response = await fetch(url);
@@ -29,8 +26,6 @@ const FormCandidates = (props) => {
       <Form>
         <Form.Group controlId="formCity">
           <Form.Label>Cidade</Form.Label>
-          {/* <Form.Control type="text" onChange={ e => setCity(e.target.value)}
-              placeholder="Digite critério de cidade" /> */}
           <Typeahead
             labelKey="city"
             onChange={setCity}
@@ -42,8 +37,6 @@ const FormCandidates = (props) => {
 
         <Form.Group controlId="formYears">
           <Form.Label>Anos de experiência</Form.Label>
-          {/* <Form.Control type="text" 
-              onChange={ e => setYears(e.target.value)} placeholder="Digite critério de anos de experiência" /> */}
           <Typeahead
             labelKey="years"
             onChange={setYears}
