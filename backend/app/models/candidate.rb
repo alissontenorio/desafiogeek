@@ -12,7 +12,12 @@ class Candidate < ApplicationRecord
         c.limit(5)     
     end
 
-    def self.get_5_best_matches(years_experience_min, years_experience_max, city_district, technologies)
+    def self.get_5_best_matches(years_experience_min = 0, years_experience_max = 999, city_district = 'Remote', 
+                              technologies = ",")
+      years_experience_min = years_experience_min.to_i
+      years_experience_max = years_experience_max.to_i
+      technologies = "," if technologies.nil?
+      technologies = technologies.split(',')
       technologies = "'#{technologies.join("','")}'"
       city_district = "'#{city_district}'"
 

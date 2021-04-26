@@ -1,9 +1,7 @@
 class CandidatesController < ApplicationController
   def list_5_best_matches
-    #candidates_best_5_matches = Candidate.get_5_best_matches_by_experience_city_and_technology(
-    #                params[:years_experience].to_i, Util.get_splitted_city_and_district(params[:city])[0], params[:technologies])
-    candidates_best_5_matches = Candidate.get_5_best_matches(params[:years_experience_min].to_i, 
-      params[:years_experience_max].to_i, params[:city], params[:technologies].split(','))
+    candidates_best_5_matches = Candidate.get_5_best_matches(params[:years_experience_min], 
+      params[:years_experience_max], params[:city], params[:technologies])
     
       candTemp = []
       candidates_best_5_matches.map { |k|
