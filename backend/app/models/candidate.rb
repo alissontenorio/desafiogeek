@@ -7,16 +7,22 @@ class Candidate < ApplicationRecord
 
     def self.get_5_best_matches(years_experience_min, years_experience_max, city_state, 
                               technologies = ",")
+      # Ajustar os parâmetros de years_experience, city_state e technologies. 
+      # Idealmente tiraria daqui e colocaria em um método chamado no controller talvez
+      # numa classe PORO separada
       years_experience_min = years_experience_min.present? ? years_experience_min.to_i : 0
       years_experience_max = years_experience_max.present? ? years_experience_max.to_i : 999
+
       city_state = city_state.present? ? city_state.strip : 'Remote'
+      city_state = "'#{city_state}'"
+
       technologies = "," if technologies.nil?
       technologies = technologies.split(',').map{|k| k.strip}
-      ids_technologies = []
+      ids_technologies = []      
       technologies.map{|k| ids_technologies << Technology.find_by(name: k).id}
+      ids_technologies = Technology.all.pluck(:id) if ids_technologies.empty?
       ids_technologies = "'#{ids_technologies.join("','")}'"
       
-      city_state = "'#{city_state}'"
 
       matches = connection.execute """
         select cs.id, cs.city_state as city, cs.years_experience, (cs.sumYears + cs.sumCities + cs.sumTechs) as score_points
