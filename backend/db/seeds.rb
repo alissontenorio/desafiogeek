@@ -9,25 +9,29 @@ def get_lower_year_experience(years_experience)
     years_experience.split('-').first.split('+').first
 end
 
-def get_splitted_city_and_district(city_district)
-    city_district = city_district.split('-')
-    [city_district.first.strip, city_district.last.strip]
+def get_splitted_city_and_state(city_state)
+    city_state = city_state.split('-')
+    [city_state.first.strip, city_state.last.strip]
 end
 
 array_candidates = []
-array_technologies = []
+array_candidate_technologies = []
+
 candidates_list.each do |candidate|
-    city_district = get_splitted_city_and_district(candidate["city"])
-    array_candidates << Candidate.new(id: candidate["id"], city: city_district[0], district: city_district[1],
+    city_state = get_splitted_city_and_state(candidate["city"])
+    array_candidates << Candidate.new(id: candidate["id"], city: city_state[0], state: city_state[1],
                       years_experience: get_lower_year_experience(candidate["experience"])).attributes 
     candidate["technologies"].each do |technology|
-        array_technologies << CandidateTechnology.new(candidate_id: candidate["id"], name: technology["name"], 
+        tech_temp =  Technology.find_by(name: technology["name"])
+        tech = tech_temp.blank? ? Technology.create(name: technology["name"]) : tech_temp 
+        array_candidate_technologies << CandidateTechnology.new(candidate_id: candidate["id"], 
+                                    technology_id: tech.id, 
                                     is_main_tech: technology["is_main_tech"]).attributes
     end
 end
 
 time = Benchmark.measure {
   Candidate.create(array_candidates)
-  CandidateTechnology.create(array_technologies)
+  CandidateTechnology.create(array_candidate_technologies)
 }
 puts time.real

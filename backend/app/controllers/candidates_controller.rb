@@ -11,13 +11,13 @@ class CandidatesController < ApplicationController
           'district' => k['city'].split(' - ')[1],
           'years_experience' => k['years_experience'],
           'candidate_technologies' => CandidateTechnology.where(candidate_id: k['id'])
-                                                            .select(:id, :name, :is_main_tech)
+                                                            .select(:id, :name, :is_main_tech).joins(:technology)
         }
       }
     render :json => candTemp
   end
 
   def cities
-    render :json => Candidate.distinct.pluck(:city, :district).map{|city, district| city + " - " + district}
+    render :json => Candidate.distinct.pluck(:city, :state).map{|city, state| city + " - " + state}
   end 
 end

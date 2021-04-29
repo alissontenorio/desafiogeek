@@ -10,27 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_24_172351) do
+ActiveRecord::Schema.define(version: 2021_04_26_172351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "candidate_technologies", force: :cascade do |t|
     t.bigint "candidate_id", null: false
-    t.string "name", null: false
+    t.bigint "technology_id", null: false
     t.boolean "is_main_tech"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["candidate_id"], name: "index_candidate_technologies_on_candidate_id"
+    t.index ["technology_id"], name: "index_candidate_technologies_on_technology_id"
   end
 
   create_table "candidates", force: :cascade do |t|
     t.string "city", null: false
-    t.string "district", null: false
+    t.string "state", null: false
     t.integer "years_experience", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "technologies", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "candidate_technologies", "candidates"
+  add_foreign_key "candidate_technologies", "technologies"
 end
