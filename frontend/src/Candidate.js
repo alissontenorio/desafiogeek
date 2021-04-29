@@ -12,12 +12,12 @@ function printMainTechnologies(technologies){
           //.reduce( (prevName, name) => /*prevName + ", " +*/ name), '');
 }
 
-const Candidate = ({ id, city, district, years_experience, technologies }) => {
+const Candidate = ({ id, city, state, years_experience, technologies }) => {
     return (<>
     <tr>
       <th scope="row">{id}</th>
       <td>{city}</td>
-      <td>{district}</td>
+      <td>{state}</td>
       <td>{years_experience}</td>
       <td>{printMainTechnologies(technologies)}</td>
     </tr>

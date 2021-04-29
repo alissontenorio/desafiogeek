@@ -11,7 +11,7 @@ function printCandidates(candidates) {
           <Candidate
             id={candidate.id}
             city={candidate.city}
-            district={candidate.district}
+            state={candidate.state}
             years_experience={candidate.years_experience}
             technologies={candidate.candidate_technologies}
           /> 

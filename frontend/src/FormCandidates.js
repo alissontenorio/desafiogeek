@@ -26,9 +26,6 @@ const FormCandidates = (props) => {
       const url = baseUrl+"/candidates/list_best_matches?years_experience_min="+yearsMin+
       "&years_experience_max="+yearsMax+"&city="+city+"&technologies="+encodeURIComponent(technology);
 
-      console.log(technology);
-      console.log(url);
-
       return fetch(url)
         .then(res => res.json());        
         //.then(candidates_top_5 => props.setCandidates(candidates_top_5)); 
